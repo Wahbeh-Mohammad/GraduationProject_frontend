@@ -16,7 +16,7 @@ const Register = (props) => {
     }
     const handleSubmit = async () => {
         console.log(registrationData)
-        const response = await fetch('http://localhost:3002/api/v1/user/signup', {
+        const response = await fetch('http://localhost:3000/api/v1/user/signup', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

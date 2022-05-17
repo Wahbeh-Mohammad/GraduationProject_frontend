@@ -11,7 +11,7 @@ const Login = (props) => {
         setError("");
         const body = { username, password };
         try {
-            const response = await fetch("http://localhost:3002/api/v1/user/login", {
+            const response = await fetch("http://localhost:3000/api/v1/user/login", {
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json"

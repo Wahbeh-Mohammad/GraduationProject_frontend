@@ -41,7 +41,7 @@ const SubmitCode = () => {
         const body = { source_code: prepareCode(code), language_id: languageID, problemId};
         try {
             console.log(body);
-            const response = await fetch("http://localhost:3002/api/v1/submission/new", {
+            const response = await fetch("http://localhost:3000/api/v1/submission/new", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const SubmitCode = () => {
             window.location.assign("/login");
         }
         try {
-            fetch("http://localhost:3002/api/v1/user/jwt", {
+            fetch("http://localhost:3000/api/v1/user/jwt", {
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json"

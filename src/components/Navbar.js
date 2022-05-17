@@ -18,7 +18,7 @@ const Navbar = () => {
         const token = cookie.get("jwt");
 
         try {
-            fetch("http://localhost:3002/api/v1/user/jwt", {
+            fetch("http://localhost:3000/api/v1/user/jwt", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

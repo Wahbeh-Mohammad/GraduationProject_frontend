@@ -9,7 +9,7 @@ const Problem = () => {
 
     useEffect(() => {
         try {
-            fetch(`http://localhost:3002/api/v1/problem/${problemId}`, {
+            fetch(`http://localhost:3000/api/v1/problem/${problemId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -18,7 +18,7 @@ const Problem = () => {
                 .then((responseJson) => {
                     setProblem(responseJson.data);
                 })
-            fetch(`http://localhost:3002/api/v1/sample/${problemId}`, {
+            fetch(`http://localhost:3000/api/v1/sample/${problemId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
