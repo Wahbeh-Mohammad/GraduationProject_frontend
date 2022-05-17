@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { prepareCode } from "../utils/encodingUtils";
 import Editor from "@monaco-editor/react"
@@ -29,6 +29,7 @@ const Submit = (props) => {
     const [stdout, setStdout] = useState("");
     const [time, setTime] = useState(null);
     const [memory, setMemory] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const hanldeLanguageChange = (e) => {
         const name = e.target.value;
@@ -41,7 +42,7 @@ const Submit = (props) => {
         setStdin(e.target.value)
     }
     const handleSubmit = async () => {
-        const body = { stdin, source_code: prepareCode(code), language_id: languageID, problemId: "625c649fbfb5168e7f5dd371" };
+        const body = { stdin, source_code: prepareCode(code), language_id: languageID};
         try {
             console.log(body);
             const response = await fetch("http://localhost:3000/api/v1/submission/", {
@@ -62,9 +63,35 @@ const Submit = (props) => {
         }
     }
 
+    useEffect(() => {
+        const token = cookie.get("jwt");
+        if(!token) {
+            window.location.assign("/login");
+        }
+        try {
+            fetch("http://localhost:3000/api/v1/user/jwt", {
+                method:"POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({ token })
+            }).then((response)=>{
+                const parsedResponse = response.json();
+                console.log(parsedResponse);
+                if(response.status === 200) {
+                    setLoggedIn(true);
+                } else {
+                    cookie.set("jwt", "", { maxAge: 1, path:"/" });
+                    window.location.assign("/login");
+                }
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+    
     return (
-        <div>
-            {cookie.get('jwt') && <>
+        <> { loggedIn && <>
                 <div>
                     <select value={languageName} onChange={hanldeLanguageChange} >
                         <option value="cpp"> C++ </option>
@@ -95,14 +122,7 @@ const Submit = (props) => {
                 <div>
                     <button onClick={handleSubmit}> Submit </button>
                 </div>
-            </>
-            }
-            {
-                !cookie.get('jwt') && <>
-                    you need to login.
-                </>
-            }
-        </div>
+        </> } </>
     );
 }
 
