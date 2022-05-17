@@ -1,0 +1,44 @@
+.editor-box {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    padding:2.5rem
+}
+
+.section {
+    padding:1rem;
+    border:1px solid black;
+}
+
+.form {
+    display:flex;
+    gap:1rem;
+}
+
+.input {
+    font-size: large;
+}
+
+.editor-wrapper {
+    flex:1;
+    padding:15px;
+}
+
+.preview-wrapper {
+    flex:1;
+    padding:15px;
+    overflow-y: hidden;
+}
+
+.preview {
+    overflow-y: scroll;
+    max-height: 500px;
+    height: 500px;
+}
+
+.wrap {
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+    padding:2.5rem;
+}
