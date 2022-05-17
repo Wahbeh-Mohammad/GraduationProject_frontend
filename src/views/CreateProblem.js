@@ -20,6 +20,20 @@ Given numbers $$(A, B, C)$$:
 
 Output the result of the calculation
 `
+const testcasesSample = `{
+    "samples":[
+        {
+            "input":"1\\n2\\n3",
+            "output": "6"
+        }
+    ],
+    "testcases": [
+        {
+            "input": "15\\n15\\n15",
+            "output": "45"
+        }
+    ]
+}`
 
 // more information about math markdown
 // https://levelup.gitconnected.com/adding-katex-and-markdown-in-react-7b70694004ef
@@ -33,11 +47,15 @@ const CreateProblem = (props) => {
     const [timeLimit, setTimeLimit] = useState(null);
     const [memoryLimit, setMemoryLimit] = useState(null);
     const [statement, setStatement] = useState(statementSample);
+    const [_testcases, setTestcases] = useState(testcasesSample);
     const [tags, setTags] = useState([]);
     const [info, setInfo] = useState("");
 
     const handleSubmit = async () => {
         setInfo("");
+        const { samples, testcases } = JSON.parse(_testcases);
+        if(!samples) {setInfo("Testcases must have samples"); return;}
+        if(!testcases) {setInfo("Testcases must have testcases"); return;}
         if(!name) { setInfo("Invalid Problem Name"); return; }
         if(!contestId) { setInfo("Invalid contest id"); return; }
         if(!timeLimit) { setInfo("Invalid Time Limit"); return; }
@@ -45,7 +63,8 @@ const CreateProblem = (props) => {
         if(!tags) { setInfo("Invalid Problem tags"); return; }
 
         const body = { name, statement, contestId, timeLimit, memoryLimit, tags: tags.split(" ") };
-        
+        console.log(samples);
+        console.log(testcases);
         const response = await fetch("http://localhost:3000/api/v1/problem/new", {
             method:"POST",
             headers:{
@@ -55,8 +74,34 @@ const CreateProblem = (props) => {
             body: JSON.stringify(body)
         });
 
-        const data = await response.json();
-        console.log(data);
+        const { message, data } = await response.json();
+        const newProblemId = data._id;
+        if(newProblemId) {
+            samples.forEach( async (element) => {
+                const sampleResponse = await fetch("http://localhost:3000/api/v1/sample/new", {
+                    method:"POST",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "authorization": `bearer ${cookie.get("jwt")}`
+                    },
+                    body: JSON.stringify({ ...element, problemId: newProblemId })
+                });
+                const { message, data } = await sampleResponse.json();
+                console.log(message);
+            });
+            testcases.forEach( async (element) => {
+                const sampleResponse = await fetch("http://localhost:3000/api/v1/testcase/new", {
+                    method:"POST",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "authorization": `bearer ${cookie.get("jwt")}`
+                    },
+                    body: JSON.stringify({ ...element, problemId: newProblemId })
+                });
+                const { message, data } = await sampleResponse.json();
+                console.log(message);
+            });   
+        }
     }
 
 
@@ -107,12 +152,23 @@ const CreateProblem = (props) => {
                                 value={statement}
                                 onChange={(e) => setStatement(e)}
                                 className="editor"
-                                />
+                            />
                         </div>
                         <div className="preview-wrapper">
                             <Markdown statement={statement} />
                         </div>
                     </div>
+                </div>
+                <div className="section">
+                    <h1> Problem samples and testcases </h1>
+                    <Editor
+                        height="50vh"
+                        width="50vw"
+                        language={"json"}
+                        value={_testcases}
+                        onChange={(e) => setTestcases(e)}
+                        className="editor"
+                    />
                 </div>
                 <div className="section">
                     <button onClick={handleSubmit}> Create Problem </button>
