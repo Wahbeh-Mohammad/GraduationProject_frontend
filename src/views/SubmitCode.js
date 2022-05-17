@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { prepareCode } from "../utils/encodingUtils";
 import Editor from "@monaco-editor/react"
+import { useParams } from "react-router-dom";
 
 const SAMPLE_CPP = `
 #include <bits/stdc++.h>
@@ -20,16 +21,13 @@ const languages = {
     java: 62,
     python: 71
 }
-const Submit = (props) => {
+const SubmitCode = () => {
     const cookie = new Cookies();
     const [code, setCode] = useState(SAMPLE_CPP);
     const [languageID, setLanguageID] = useState(53);
     const [languageName, setLanguageName] = useState("cpp");
-    const [stdin, setStdin] = useState("");
-    const [stdout, setStdout] = useState("");
-    const [time, setTime] = useState(null);
-    const [memory, setMemory] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
+    const {problemId} = useParams();
 
     const hanldeLanguageChange = (e) => {
         const name = e.target.value;
@@ -38,14 +36,12 @@ const Submit = (props) => {
         setLanguageName(name);
         setLanguageID(id);
     }
-    const handleStdin = (e) => {
-        setStdin(e.target.value)
-    }
+    
     const handleSubmit = async () => {
-        const body = { stdin, source_code: prepareCode(code), language_id: languageID};
+        const body = { source_code: prepareCode(code), language_id: languageID, problemId};
         try {
             console.log(body);
-            const response = await fetch("http://localhost:3002/api/v1/submission/", {
+            const response = await fetch("http://localhost:3002/api/v1/submission/new", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,9 +51,6 @@ const Submit = (props) => {
             });
             const parsedResponse = await response.json();
             console.log(parsedResponse);
-            setStdout(parsedResponse.data.stdout)
-            setTime(parsedResponse.data.time)
-            setMemory(parsedResponse.data.memory)
         } catch (err) {
             console.log(err);
         }
@@ -91,7 +84,7 @@ const Submit = (props) => {
     }, []);
     
     return (
-        <center style ={{marginTop:"50px"}}> { loggedIn && <>
+        <> { loggedIn && <>
                 <div>
                     <select value={languageName} onChange={hanldeLanguageChange} >
                         <option value="cpp"> C++ </option>
@@ -100,30 +93,17 @@ const Submit = (props) => {
                     </select>
                 </div>
                 <Editor
-                    height="50vh"
-                    width="50vw"
+                    height="100vh"
+                    width="100vw"
                     language={languageName}
                     onChange={(e) => setCode(e)}
                     className="editor"
                 />
-                <div >
-                    <label for = "input">Input:</label>
-                    <textarea name = "input" onChange={handleStdin} value={stdin} rows="10" cols="50"/>
-                    <label for = "output">Output:</label>
-                    <textarea name = "output" value={stdout} rows="10" cols="50">
-                        
-                        
-                    </textarea>
-                    <br />
-
-                    {memory && time && (<><span>Execution time: {time} s</span><br/>
-                    <span>Memory Usage: {memory} KB</span><br/></>)}
-                </div>
                 <div>
                     <button onClick={handleSubmit}> Submit </button>
                 </div>
-        </> } </center>
+        </> } </>
     );
 }
 
-export default Submit;
+export default SubmitCode;

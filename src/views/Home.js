@@ -9,11 +9,8 @@ const Home = (props) => {
 
     useEffect(() => {
         const token = cookie.get("jwt");
-        if(!token) {
-            window.location.assign("/login");
-        }
         try {
-            fetch("http://localhost:3000/api/v1/user/jwt", {
+            fetch("http://localhost:3002/api/v1/user/jwt", {
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -24,9 +21,6 @@ const Home = (props) => {
                 console.log(parsedResponse);
                 if(response.status === 200) {
                     setLoggedIn(true);
-                } else {
-                    cookie.set("jwt", "", { maxAge: 1, path:"/" });
-                    window.location.assign("/login");
                 }
             })
         } catch (err) {
@@ -36,11 +30,7 @@ const Home = (props) => {
 
 
     return ( 
-        <> { loggedIn && <>
-                <h1>Hello World</h1>
-                <a href="/submit"> Submit </a>
-             </>
-        } </> 
+        <> </> 
     );
 }
  
