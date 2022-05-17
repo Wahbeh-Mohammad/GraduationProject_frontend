@@ -39,6 +39,7 @@ const Home = (props) => {
         <> { loggedIn && <>
                 <h1>Hello World</h1>
                 <a href="/submit"> Submit </a>
+                <a href="/admin/problem/create"> Create New Problem </a>
              </>
         } </> 
     );
