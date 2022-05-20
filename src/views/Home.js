@@ -30,16 +30,7 @@ const Home = (props) => {
 
 
     return ( 
-<<<<<<< HEAD
         <> </> 
-=======
-        <> { loggedIn && <>
-                <h1>Hello World</h1>
-                <a href="/submit"> Submit </a>
-                <a href="/admin/problem/create"> Create New Problem </a>
-             </>
-        } </> 
->>>>>>> 9cf4827d5c3be3019d27b98ba0d74e294ac75a90
     );
 }
  
