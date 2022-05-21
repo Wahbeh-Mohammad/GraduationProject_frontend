@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
+import "../styles/navbar.css"
+import { GoCode } from 'react-icons/go';
+import Avatar from '@mui/material/Avatar';
 
 const Navbar = () => {
     const cookie = new Cookies();
@@ -8,8 +11,8 @@ const Navbar = () => {
     const [user, setUser] = useState({});
     const token = cookie.get("jwt");
 
-    const handleLogout = () =>{
-        cookie.set("jwt", "", { maxAge: 1, path:"/" });
+    const handleLogout = () => {
+        cookie.set("jwt", "", { maxAge: 1, path: "/" });
 
         window.location.assign("/");
     }
@@ -26,11 +29,11 @@ const Navbar = () => {
                 body: JSON.stringify({ token })
             }).then((response => response.json()))
                 .then((responseJson) => {
-                    if(responseJson.message === 'Authorized'){
+                    if (responseJson.message === 'Authorized') {
                         setLoggedIn(true)
                         setUser(responseJson.data);
                     }
-                    else{
+                    else {
                         setLoggedIn(false);
                         setUser({});
                     }
@@ -46,26 +49,36 @@ const Navbar = () => {
         <>
 
             {
-                loggedIn && 
+                loggedIn &&
                 <>
-                    <div style={{ 'display': 'flex', justifyContent: 'space-around' }}>
-                        <a href="/home"> Home </a>
-                        <a href="/problems"> Problems </a>
-                        <a href="/contests"> Contests </a>
-                        <a href="/blogs"> Blogs </a>
-                        <a href='/submit'>Custom Run</a>
-                        <div>
-                            Hi {" "}
-                            <a href={`/user/${user.id}`}>{user.username} </a>
+                    <div className="nav" >
+                        <div className='brand'>
+                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
+                            <GoCode size='1.2em' color='black' />
                         </div>
-                        <a onClick={handleLogout} href="#">Logout</a>
+                        <div className='links'>
+                            <a href="/problems">Problems</a>
+                            <a href="/contests">Contests</a>
+                            <a href="/blogs">Blogs</a>
+                            <a href='/submit'>Custom Run</a>
+                            <a href="/admin/problem/create">Create New Problem</a>
+
+                        </div>
+                        <div className='profile'>
+                            <div>
+
+                            <Avatar src="/mock.png" style={{marginRight:"0.7em", width:'42px', height:'42px'}}/>
+                            </div>
+                            
+                            <a className ='logout' onClick={handleLogout} href="#" style={{marginRight:"0.7em"}}>Logout</a>
+                        </div>
                     </div>
 
                 </>
             }
-            {!loggedIn && 
+            {!loggedIn &&
                 <>
-                    <div style={{ 'display': 'flex', justifyContent: 'space-around' }}>
+                    <div className="nav" >
                         <a href="/home"> Home </a>
                         <a href="/problems"> Problems </a>
                         <a href="/contests"> Contests </a>
