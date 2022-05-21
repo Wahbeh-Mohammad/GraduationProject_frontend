@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Home, Login, Submit, Register } from './views/index';
+import { Home, Login, Submit, Register ,AllSubmision} from './views/index';
 
 
 const App = () => {
@@ -11,6 +11,7 @@ const App = () => {
           <nav>
             <Link to="/login" > Login </Link>
             <Link to="/register" > Register </Link>
+            <Link to ="/allsubmision"> AllSubmision</Link>
           </nav>
         </div>
         <Routes>
@@ -18,6 +19,7 @@ const App = () => {
           <Route exact path="/home" element = { <Home />} />
           <Route exact path="/login" element={ <Login/> } />
           <Route exact path="/submit" element={ <Submit /> } />
+          <Route exact path="/allsubmision" element={<AllSubmision />} />
         </Routes>
       </Router>
     </div>
