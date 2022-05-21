@@ -9,9 +9,6 @@ const Home = (props) => {
 
     useEffect(() => {
         const token = cookie.get("jwt");
-        if(!token) {
-            window.location.assign("/login");
-        }
         try {
             fetch("http://localhost:3000/api/v1/user/jwt", {
                 method:"POST",
@@ -24,9 +21,6 @@ const Home = (props) => {
                 console.log(parsedResponse);
                 if(response.status === 200) {
                     setLoggedIn(true);
-                } else {
-                    cookie.set("jwt", "", { maxAge: 1, path:"/" });
-                    window.location.assign("/login");
                 }
             })
         } catch (err) {
@@ -36,11 +30,16 @@ const Home = (props) => {
 
 
     return ( 
+<<<<<<< HEAD
+        <> </> 
+=======
         <> { loggedIn && <>
                 <h1>Hello World</h1>
                 <a href="/submit"> Submit </a>
+                <a href="/admin/problem/create"> Create New Problem </a>
              </>
         } </> 
+>>>>>>> 9cf4827d5c3be3019d27b98ba0d74e294ac75a90
     );
 }
  
