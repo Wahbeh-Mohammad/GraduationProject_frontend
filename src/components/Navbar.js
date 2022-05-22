@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
-
+import "../styles/navbar.css"
 const Navbar = () => {
     const cookie = new Cookies();
 
