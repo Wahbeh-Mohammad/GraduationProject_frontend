@@ -57,7 +57,6 @@ const CreateProblem = (props) => {
         if(!samples) {setInfo("Testcases must have samples"); return;}
         if(!testcases) {setInfo("Testcases must have testcases"); return;}
         if(!name) { setInfo("Invalid Problem Name"); return; }
-        if(!contestId) { setInfo("Invalid contest id"); return; }
         if(!timeLimit) { setInfo("Invalid Time Limit"); return; }
         if(!memoryLimit) { setInfo("Invalid Memory Limit"); return; }
         if(!tags) { setInfo("Invalid Problem tags"); return; }

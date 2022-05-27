@@ -61,7 +61,8 @@ const Navbar = () => {
                             <a href="/contests">Contests</a>
                             <a href="/blogs">Blogs</a>
                             <a href='/submit'>Custom Run</a>
-                            <a href="/admin/problem/create">Create New Problem</a>
+                            {user.type !== 'Contestant' && <a href="/admin/problem/create">Create New Problem</a>}
+                            <a href="/allsubmision">Submissions</a>
 
                         </div>
                         <div className='profile'>
@@ -79,12 +80,20 @@ const Navbar = () => {
             {!loggedIn &&
                 <>
                     <div className="nav" >
-                        <a href="/home"> Home </a>
-                        <a href="/problems"> Problems </a>
-                        <a href="/contests"> Contests </a>
-                        <a href="/blogs"> Blogs </a>
-                        <a href="/login" > Login </a>
-                        <a href="/register" > Register </a>
+                        <div className='brand'>
+                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
+                            <GoCode size='1.2em' color='black' />
+                        </div>
+                        <div className='links'>
+                            <a href="/problems">Problems</a>
+                            <a href="/contests">Contests</a>
+                            <a href="/blogs">Blogs</a>
+                            <a href="/allsubmision">Submissions</a>
+                        </div>
+                        <div className='profile links'>
+                            <a href = "/login" style={{marginRight:'1em'}}>Login</a>
+                            <a className ='logout'  href="/register" style={{marginRight:"0.7em"}}>Register</a>
+                        </div>
                     </div>
                 </>
             }

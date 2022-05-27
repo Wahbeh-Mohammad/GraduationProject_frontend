@@ -16,8 +16,8 @@ const Home = (props) => {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({ token })
-            }).then((response)=>{
-                const parsedResponse = response.json();
+            }).then(async(response)=>{
+                const parsedResponse = await response.json();
                 console.log(parsedResponse);
                 if(response.status === 200) {
                     setLoggedIn(true);
