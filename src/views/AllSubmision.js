@@ -47,6 +47,14 @@ const AllSubmision = () => {
         if (pageNumber >1 )
             setPageNumber (pageNumber-1)
     };
+    const colorVerdict = (verdict) =>{
+        switch(verdict){
+            case "Accepted":
+                return "#0a0"
+            default:
+                return "#ff0000"
+        }
+    }
 
 
 
@@ -96,7 +104,7 @@ const AllSubmision = () => {
                         <td>{submision.userId}</td>
                         <td>{submision.problemId}</td>
                         <td>{submision.language}</td>
-                        <td>{submision.verdict}</td>
+                        <td style={{color:colorVerdict(submision.verdict) }}>{submision.verdict}</td>
                         <td>{submision.executionTime}</td>
                         <td>{submision.memoryUsage}</td>
                         
