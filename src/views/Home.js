@@ -30,7 +30,10 @@ const Home = (props) => {
 
 
     return ( 
-        <> </> 
+        <>
+        <a href="/login" > Login </a>
+        <a href="/register" > Register </a>
+        <a href='/contests/:id'> contests</a> </> 
     );
 }
  

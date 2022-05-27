@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest } from './views/index';
+import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest, Contests } from './views/index';
 import Navbar from './components/Navbar'
 
 import "./styles/global.css"
@@ -21,6 +21,9 @@ const App = () => {
           <Route exact path="/admin/contest/create" element={<CreateContest />} />
           <Route exact path="/problem/:problemId" element={<Problem />} />
           <Route exact path="/recent/:userId" element={<RecentUserSubmission />} />
+          <Route exact path="/contests/:contestId" element={<Contests />} />
+          <Route exact path="/problem/:contestId" element={<Contests />} />
+
 
         </Routes>
       </Router>
