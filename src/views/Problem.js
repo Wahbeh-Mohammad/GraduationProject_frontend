@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Markdown from "../components/Markdown";
 
 const Problem = () => {
     const [problem, setProblem] = useState(null);
@@ -46,8 +47,8 @@ const Problem = () => {
                     <br></br>
                     <br></br>
                     <br></br>
+                    <Markdown statement={problem.statement} />
                     </center>
-                    <h2>{problem.statement}</h2>
                     <hr></hr>
                     <div style={{display: "flex",flexDirection:'column', flexWrap:"wrap",justifyContent:"space-between"}}>
                     {samples.map((sample, idx) => {
