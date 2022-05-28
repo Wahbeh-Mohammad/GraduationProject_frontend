@@ -1,0 +1,14 @@
+.register-wrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+    width:100%;
+}
+
+.register {
+    display:flex;
+    flex-direction: column;
+    padding:2rem;
+}

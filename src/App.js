@@ -1,13 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest, Contests } from './views/index';
+import { Home, Login, Submit, Register, Problem, SubmitCode, 
+         CreateProblem, AllSubmision, RecentUserSubmission, 
+         CreateContest, Contests, AllProblems,
+         CreateBlog } from './views/index';
 import Navbar from './components/Navbar'
 
 import "./styles/global.css"
 
 const App = () => {
   return (
-    <div style={{display:"flex",flexDirection:'column', justifyContent:"center", alignItems:'center'}}>
+    <>
       <Navbar />
       <Router>
         <Routes>
@@ -23,11 +26,11 @@ const App = () => {
           <Route exact path="/recent/:userId" element={<RecentUserSubmission />} />
           <Route exact path="/contests/:contestId" element={<Contests />} />
           <Route exact path="/problem/:contestId" element={<Contests />} />
-
-
+          <Route exact path="/problems" element={ <AllProblems /> } />
+          <Route exact path="/admin/blog/create" element={ <CreateBlog /> } />
         </Routes>
       </Router>
-    </div>
+    </>
   );
 }
 

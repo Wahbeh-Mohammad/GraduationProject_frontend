@@ -1,5 +1,8 @@
+import { Box, Paper, TextField, Typography, Button } from "@mui/material";
 import React, { useState } from "react";
 import Cookies from 'universal-cookie';
+
+import "../styles/login.css";
 
 const Login = (props) => {
     const cookie = new Cookies();
@@ -9,6 +12,15 @@ const Login = (props) => {
 
     const handleSubmit = async () => {
         setError("");
+        if(!username || username === "") {
+            setError("Username cannot be empty.");
+            return;
+        }
+        if(!password || password === ""){
+            setError("Password cannot be empty.");
+            return;
+        }
+            
         const body = { username, password };
         try {
             const response = await fetch("http://localhost:3000/api/v1/user/login", {
@@ -33,12 +45,15 @@ const Login = (props) => {
     }
 
     return (
-        <form style={{padding:15}}>
-            <input value={username} type="text" placeholder="Username" onChange = { (e) => setUsername(e.target.value) } required />
-            <input value={password} type="password" placeholder="Password"  onChange = { (e) => setPassword(e.target.value) } required />
-            <button onClick={ e=>{e.preventDefault(); handleSubmit()} }>Submit</button>
-            { error && <h4> {error} </h4> }
-        </form>
+        <Box className="login-wrapper">
+            <Box className="login" component={Paper}>
+                <Typography color="primary" variant="h4"> Login </Typography>
+                <TextField label="Username" variant="standard" type="text" onChange={(e) => {setUsername(e.target.value)}} />
+                <TextField label="Password" variant="standard" type="password" onChange={(e) => {setPassword(e.target.value)}} />
+                <Button variant="contained" onClick={handleSubmit}> Submit </Button>
+                { error && <Typography color="red" variant="h6"> {error} </Typography> }
+            </Box>
+        </Box>
     );
 }
 

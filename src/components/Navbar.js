@@ -62,6 +62,7 @@ const Navbar = () => {
                             <a href="/blogs">Blogs</a>
                             <a href='/submit'>Custom Run</a>
                             {user.type !== 'Contestant' && <a href="/admin/problem/create">Create New Problem</a>}
+                            {user.type !== 'Contestant' && <a href="/admin/blog/create">Create New Blog</a>}
                             <a href="/allsubmision">Submissions</a>
 
                         </div>
