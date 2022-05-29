@@ -3,12 +3,26 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Home, Login, Submit, Register, Problem, SubmitCode, 
          CreateProblem, AllSubmision, RecentUserSubmission, 
          CreateContest, Contests, AllProblems,
-         CreateBlog } from './views/index';
+         CreateBlog, Users, AllContests } from './views/index';
 import Navbar from './components/Navbar'
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import "./styles/global.css"
 
 const App = () => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#343a40',
+      },
+      secondary: {
+        main: '#f6a600',
+        contrastText: '#fafafa',
+        light: '#0066ff',
+
+      },
+    }
+  });
   return (
     <>
       <Navbar />
@@ -25,9 +39,10 @@ const App = () => {
           <Route exact path="/problem/:problemId" element={<Problem />} />
           <Route exact path="/recent/:userId" element={<RecentUserSubmission />} />
           <Route exact path="/contests/:contestId" element={<Contests />} />
-          <Route exact path="/problem/:contestId" element={<Contests />} />
           <Route exact path="/problems" element={ <AllProblems /> } />
           <Route exact path="/admin/blog/create" element={ <CreateBlog /> } />
+          <Route exact path="/users" element={<Users />} />
+            <Route exact path="/contests" element={<AllContests />} />
         </Routes>
       </Router>
     </>

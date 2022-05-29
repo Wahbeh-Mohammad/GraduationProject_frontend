@@ -1,5 +1,7 @@
 *, *::after, *::before {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 html, body, #root {
