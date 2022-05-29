@@ -62,13 +62,13 @@ const Users = () => {
                         users.map((user, index) => {
                             return (
                                 user.username && <tr style={{ marginInline: '1em', backgroundColor: rowColor(index) }}>
-                                    <td style={{ fontWeight: "700", textAlign: 'center', color: fontColor(index) }} >
+                                    <td style={{ textAlign: 'center', color: fontColor(index) }} >
                                         <a href={"user/" + user._id}>{user.username}</a>
                                     </td>
                                     <td style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', padding: '1em', gap: "12px" }}>
                                         <img src={"https://countryflagsapi.com/svg/" + user.country} alt="Egypt flag" style={{ width: '35px', height: '22px' }} title={user.country} />
                                     </td>
-                                    <td style={{ fontWeight: "700", textAlign: 'center', color: fontColor(index) }}>1243</td>
+                                    <td style={{ fontWeight: "600", textAlign: 'center', color: fontColor(index) }}>1243</td>
                                 </tr>
                             )
                         })

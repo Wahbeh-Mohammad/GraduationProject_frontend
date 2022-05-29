@@ -22,13 +22,18 @@ const AllProblems = (props) => {
             console.log(err);
         }
     }, [page]);
-
+    const rowColor = (i) => {
+        return i % 2 != 1 ? '#343a40' : '#fafafa'
+    }
+    const fontColor = (i) => {
+        return i % 2 != 1 ? '#fff' : 'black'
+    }
     return (
         <Box className="all-problems-wrapper">
             <Box className="all-problems">
                 <Box component={Paper} className="flex-row-gap pagination-controls">
-                    <Button variant="contained" onClick={ ()=>{setPage(page-1);} }> Previous </Button>
-                    <Button variant="contained" onClick={ ()=>{setPage(page+1);} }> Next </Button>
+                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page-1);} }> Previous </Button>
+                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page+1);} }> Next </Button>
                 </Box>
                 <TableContainer component={Paper}>
                     <TableHead>
@@ -51,22 +56,22 @@ const AllProblems = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { allProblems && allProblems.map((problem) => {
+                        { allProblems && allProblems.map((problem, index) => {
                                 return (
-                                    <TableRow>
+                                    <TableRow style = {{backgroundColor:rowColor(index)}}>
                                         <TableCell align="center">
-                                            <Link color="primary" target="_blank" href={`/problem/${problem._id}`}> { problem.name } </Link>    
+                                            <Link color="primary" target="_blank" href={`/problem/${problem._id}`} style = {{color:fontColor(index)}}> { problem.name } </Link>    
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Link color="primary" target="_blank" href={`/contest/${problem.contestId}`}> { problem.contestId } </Link>
+                                            <Link color="primary" target="_blank" href={`/contest/${problem.contestId}`} style = {{color:fontColor(index)}}> { problem.contestId } </Link>
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="center" style = {{color:fontColor(index)}}>
                                             { problem.memoryLimit }
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="center" style = {{color:fontColor(index)}}>
                                             { problem.timeLimit }
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="center" style = {{color:fontColor(index)}}>
                                             { problem.tags }
                                         </TableCell>
                                     </TableRow>

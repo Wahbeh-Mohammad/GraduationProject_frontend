@@ -48,8 +48,8 @@ const Login = (props) => {
         <Box className="login-wrapper">
             <Box className="login" component={Paper}>
                 <Typography color="primary" variant="h4"> Login </Typography>
-                <TextField label="Username" variant="standard" type="text" onChange={(e) => {setUsername(e.target.value)}} />
-                <TextField label="Password" variant="standard" type="password" onChange={(e) => {setPassword(e.target.value)}} />
+                <TextField color = "secondary" label="Username" variant="standard" type="text" onChange={(e) => {setUsername(e.target.value)}} />
+                <TextField color = "secondary" label="Password" variant="standard" type="password" onChange={(e) => {setPassword(e.target.value)}} />
                 <Button variant="contained" onClick={handleSubmit}> Submit </Button>
                 { error && <Typography color="red" variant="h6"> {error} </Typography> }
             </Box>
