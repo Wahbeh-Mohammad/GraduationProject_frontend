@@ -11,15 +11,15 @@ const Home = (props) => {
         const token = cookie.get("jwt");
         try {
             fetch("http://localhost:3000/api/v1/user/jwt", {
-                method:"POST",
+                method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ token })
-            }).then(async(response)=>{
+            }).then(async (response) => {
                 const parsedResponse = await response.json();
                 console.log(parsedResponse);
-                if(response.status === 200) {
+                if (response.status === 200) {
                     setLoggedIn(true);
                 }
             })
@@ -29,12 +29,11 @@ const Home = (props) => {
     }, []);
 
 
-    return ( 
+    return (
         <>
-        <a href="/login" > Login </a>
-        <a href="/register" > Register </a>
-        <a href='/contests/:id'> contests</a> </> 
+
+        </>
     );
 }
- 
+
 export default Home;
