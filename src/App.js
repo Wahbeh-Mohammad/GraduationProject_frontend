@@ -1,6 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest, Contests, Users, AllContests } from './views/index';
+import {
+  Home, Login, Submit, Register, Problem, SubmitCode,
+  CreateProblem, AllSubmision, RecentUserSubmission,
+  CreateContest, Contests, AllProblems,
+  CreateBlog, Users, AllContests
+} from './views/index';
 import Navbar from './components/Navbar'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
@@ -37,14 +42,14 @@ const App = () => {
             <Route exact path="/problem/:problemId" element={<Problem />} />
             <Route exact path="/recent/:userId" element={<RecentUserSubmission />} />
             <Route exact path="/contests/:contestId" element={<Contests />} />
+            <Route exact path="/problems" element={<AllProblems />} />
+            <Route exact path="/admin/blog/create" element={<CreateBlog />} />
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/contests" element={<AllContests />} />
-
-
           </Routes>
         </Router>
       </div>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
