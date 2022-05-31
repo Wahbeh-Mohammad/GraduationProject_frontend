@@ -55,6 +55,16 @@ const AllSubmision = () => {
                 return "#ff0000"
         }
     }
+    function convertUTCDateToLocalDate(date) {
+        var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+
+        var offset = date.getTimezoneOffset() / 60;
+        var hours = date.getHours();
+
+        newDate.setHours(hours - offset - 3);
+
+        return newDate;
+    }
 
 
 
@@ -73,6 +83,7 @@ const AllSubmision = () => {
                 <th>verdict</th>
                 <th>Time</th>
                 <th>memory</th>
+                <th> Time</th>
             </tr>
             <Dialog
                         open={isOpen}
@@ -96,6 +107,7 @@ const AllSubmision = () => {
             
 
             {submisions.map((submision, idx) => {
+                var time = convertUTCDateToLocalDate(new Date(submision.createdAt)).toLocaleString();
                 return (
                     
                     <tr key={idx}>
@@ -107,6 +119,7 @@ const AllSubmision = () => {
                         <td style={{color:colorVerdict(submision.verdict) }}>{submision.verdict}</td>
                         <td>{submision.executionTime}</td>
                         <td>{submision.memoryUsage}</td>
+                        <td> {time}</td>
                         
 
                     </tr>

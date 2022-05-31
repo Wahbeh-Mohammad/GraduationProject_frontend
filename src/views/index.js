@@ -9,3 +9,4 @@ export { default as CreateProblem } from './CreateProblem';
 export { default as RecentUserSubmission } from "./RecentUserSubmission";
 export { default as CreateContest } from "./CreateContest";
 export { default as Contests } from "./Contests"
+export { default as Profile} from "./Profile";

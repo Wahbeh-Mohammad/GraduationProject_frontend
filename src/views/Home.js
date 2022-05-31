@@ -33,8 +33,8 @@ const Home = (props) => {
         <>
         <a href="/login" > Login </a>
         <a href="/register" > Register </a>
-        <a href='/contests/:id'> contests</a> </> 
+        <a href='/contests/:id'> contests</a> 
+        <a href='/profile/:id'> profile</a> </>
     );
 }
- 
 export default Home;

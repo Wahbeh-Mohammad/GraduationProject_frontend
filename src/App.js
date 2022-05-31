@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest, Contests } from './views/index';
+import { Home, Login, Submit, Register, Problem, SubmitCode, CreateProblem, AllSubmision, RecentUserSubmission, CreateContest, Contests ,Profile} from './views/index';
 import Navbar from './components/Navbar'
 
 import "./styles/global.css"
@@ -23,6 +23,8 @@ const App = () => {
           <Route exact path="/recent/:userId" element={<RecentUserSubmission />} />
           <Route exact path="/contests/:contestId" element={<Contests />} />
           <Route exact path="/problem/:contestId" element={<Contests />} />
+          <Route exact path="/user/:userId" element={<Profile />} />
+          <Route exact path="/submission/user/:userId" element={<Profile />} />
 
 
         </Routes>
