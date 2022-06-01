@@ -54,15 +54,14 @@ const Navbar = () => {
                     <div className="nav" >
                         <div className='brand'>
                             <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
-                            <GoCode size='1.2em' color='black' />
+                            <GoCode size='1.2em' color='orange' />
                         </div>
                         <div className='links'>
                             <a href="/problems">Problems</a>
                             <a href="/contests">Contests</a>
                             <a href="/blogs">Blogs</a>
-                            <a href='/submit'>Custom Run</a>
-                            {user.type !== 'Contestant' && <a href="/admin/problem/create">Create New Problem</a>}
                             <a href="/allsubmision">Submissions</a>
+                            <a href="/users">Users</a>
 
                         </div>
                         <div className='profile'>
@@ -82,13 +81,15 @@ const Navbar = () => {
                     <div className="nav" >
                         <div className='brand'>
                             <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
-                            <GoCode size='1.2em' color='black' />
+                            <GoCode size='1.2em' color='orange' />
                         </div>
                         <div className='links'>
                             <a href="/problems">Problems</a>
                             <a href="/contests">Contests</a>
                             <a href="/blogs">Blogs</a>
                             <a href="/allsubmision">Submissions</a>
+                            <a href="/users">Users</a>
+
                         </div>
                         <div className='profile links'>
                             <a href = "/login" style={{marginRight:'1em'}}>Login</a>

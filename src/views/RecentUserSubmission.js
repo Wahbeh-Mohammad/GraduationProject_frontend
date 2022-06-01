@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import '../styles/users.css'
 
 const RecentUserSubmission = () => {
     const { userId } = useParams();
@@ -37,9 +38,14 @@ const RecentUserSubmission = () => {
     const handleClose = () => {
         setIsOpen(false);
     };
-   
-    const colorVerdict = (verdict) =>{
-        switch(verdict){
+    const rowColor = (i) => {
+        return i % 2 != 1 ? '#343a40' : '#fafafa'
+    }
+    const fontColor = (i) => {
+        return i % 2 != 1 ? '#fff' : 'black'
+    }
+    const colorVerdict = (verdict) => {
+        switch (verdict) {
             case "Accepted":
                 return "#0a0"
             default:
@@ -47,17 +53,17 @@ const RecentUserSubmission = () => {
         }
     }
     return (
-        <>
+        <div style={{display:'flex' , justifyContent:'center', marginTop:'80px'}}>
             {userSubmission &&
-                <table style={{ width: "100%", height: "100%", "border": "1px solid black", "padding": "1em" }} >
-                    <tr style={{ textAlign: "left", "border": "1px solid black", padding: '2em' }}>
-                        <th >Code</th>
-                        <th >ProblemId</th>
-                        <th >Language</th>
-                        <th >Verdict</th>
-                        <th >Time</th>
-                        <th >Memory</th>
-                        <th >Time</th>
+                <table className='table' style={{ width: "90%", boxShadow: "0px 1px 12px #888888" }}>
+                    <tr className='header' style={{margin:'1em'}}>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Code</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Problem</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Language</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Verdict</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Time</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Memory</th>
+                        <th style={{fontWeight:"bolder", fontSize:'1.2rem'}}>Issued at</th>
                     </tr>
                     <Dialog
                         open={isOpen}
@@ -71,7 +77,7 @@ const RecentUserSubmission = () => {
                         }
                     >
 
-                        <DialogContent style={{width:"300px",height:"300px"}}>
+                        <DialogContent style={{ width: "300px", height: "300px" }}>
                             <SyntaxHighlighter language="cpp" style={atomOneLight}>
                                 {code}
                             </SyntaxHighlighter>
@@ -81,28 +87,28 @@ const RecentUserSubmission = () => {
                     {userSubmission.map((item, index) => {
                         var time = convertUTCDateToLocalDate(new Date(item.createdAt)).toLocaleString();
                         return (
-                            <tr key={index}>
-                                <td style={{ paddingBlock: "1em", cursor: 'pointer',color:"#0000ff" }} onClick={() => { setIsOpen(true); setCode(item.code) }}>
+                            <tr style={{ marginInline: '1em', backgroundColor: rowColor(index) }}>
+                                <td style={{ fontWeight: "700", textAlign: 'center', cursor:'pointer', color: fontColor(index) }} onClick={() => { setIsOpen(true); setCode(item.code) }}>
                                     {item._id}
                                 </td>
-                                <td style={{ paddingBlock: "1em" }}>
-                                    <a href = {`/problem/${item.problemId._id}`}>
+                                <td style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', padding: '1em', gap: "12px", color: fontColor(index) }}>
+                                    <a href={`/problem/${item.problemId._id}`}>
                                         {item.problemId.name}
                                     </a>
                                 </td>
-                                <td style={{ paddingBlock: "1em" }}>
+                                <td style={{ textAlign: 'center', padding: '1em', gap: "12px", color: fontColor(index) }}>
                                     {item.language}
                                 </td>
-                                <td style={{ marginBlock: "1em",color:colorVerdict(item.verdict) }} >
+                                <td style={{ fontWeight: "700", color: colorVerdict(item.verdict), textAlign: 'center', color: fontColor(index) }}>
                                     {item.verdict}
                                 </td>
-                                <td style={{ paddingBlock: "1em" }} >
+                                <td style={{ textAlign: 'center', padding: '1em', gap: "12px", color: fontColor(index) }}>
                                     {item.executionTime}
                                 </td>
-                                <td style={{ paddingBlock: "1em" }} >
+                                <td style={{ textAlign: 'center', padding: '1em', gap: "12px", color: fontColor(index) }}>
                                     {item.memoryUsage}
                                 </td>
-                                <td style={{ paddingBlock: "1em" }}>
+                                <td style={{ textAlign: 'center', padding: '1em', gap: "12px", color: fontColor(index) }}>
                                     {time}
                                 </td>
 
@@ -112,7 +118,7 @@ const RecentUserSubmission = () => {
                     })}
                 </table>
             }
-        </>
+        </div>
     );
 }
 

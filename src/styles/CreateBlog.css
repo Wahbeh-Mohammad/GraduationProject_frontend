@@ -1,0 +1,15 @@
+.create-blog-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding:1rem;
+}
+
+.create-blog {
+    display:grid;
+    height:90%;
+    grid-template-columns: 50% 50%;
+}
+
+.controls {
+    padding:1rem;
+}
