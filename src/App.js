@@ -4,7 +4,7 @@ import {
   Home, Login, Submit, Register, Problem, SubmitCode,
   CreateProblem, AllSubmision, RecentUserSubmission,
   CreateContest, Contests, AllProblems,
-  CreateBlog, Users, AllContests
+  CreateBlog, Users, AllContests, Profile
 } from './views/index';
 import Navbar from './components/Navbar'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
@@ -46,6 +46,8 @@ const App = () => {
             <Route exact path="/admin/blog/create" element={<CreateBlog />} />
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/contests" element={<AllContests />} />
+            <Route exact path="/user/:userId" element={<Profile />} />
+
           </Routes>
         </Router>
       </div>

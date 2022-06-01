@@ -70,39 +70,16 @@ const Contests = () => {
                             <th> Name </th>
                         </tr>
                         {problems.map((problem, idx ) => {
-                            
                             return (
                                 
 
                                 <tr key={idx}>
-                                    
-
                                     <td>{idx+1 }</td>
-                                    <td >{problem.name}</td>
-
-
-
+                                    <td><a href={"/problem/"+problem._id}>{problem.name}</a></td>
                                 </tr>
-                                
-
                             )
-                            
-                            
-
                         })}
-
-
-
-
-
-
-
-
-
-
                     </table> </>}
-
-
         </>);
 
 
