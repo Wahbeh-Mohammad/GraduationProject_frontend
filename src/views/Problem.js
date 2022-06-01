@@ -1,4 +1,4 @@
-import { Button, TableCell, TableContainer, TableHead, Typography } from '@mui/material';
+import { Button, TableCell, TableContainer, TableHead, TextField, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Markdown from "../components/Markdown";
@@ -61,15 +61,20 @@ const Problem = () => {
                             <div >
                                 <table style={{ width: "100%" }}>
                                     <tr style={{ padding: '2em', backgroundColor: '#dee2e6', border: '1px solid #ddd' }}>
-                                        <th style={{ padding: '1.6em', fontSize:'20px' }}>Input</th>
-                                        <th style={{ padding: '1.6em' , fontSize:'20px'}}>Output</th>
+                                        <th style={{ padding: '1.6em', fontSize: '20px' }}>Input</th>
+                                        <th style={{ padding: '1.6em', fontSize: '20px' }}>Output</th>
                                     </tr>
                                     {samples && samples.map((sample, index) => {
                                         return (
                                             <>
                                                 <tr key={index} style={{ padding: '2em', borderBottom: '1px solid black' }}>
-                                                    <td style={{ padding: '1.3em', fontSize:'18px'}}>{sample.input}</td>
-                                                    <td style={{ padding: '1.3em', fontSize:'18px'}}>{sample.output}</td>
+                                                    <td style={{ padding: '1.3em', fontSize: '18px' }}>
+                                                        <TextField value={sample.input} disabled={true} multiline />
+                                                    </td>
+                                                    <td style={{ padding: '1.3em', fontSize: '18px' }}>
+                                                        <TextField value={sample.output} disabled={true} multiline />
+
+                                                    </td>
                                                 </tr>
                                                 <tr key={index} >
                                                     <td ><hr /></td>
