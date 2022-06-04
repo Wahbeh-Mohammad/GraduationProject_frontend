@@ -94,7 +94,7 @@ const SubmitCode = () => {
     }, []);
 
     return (
-        <> {loggedIn && <>
+        <> {loggedIn === true && <div>
             <div>
                 <select value={languageName} onChange={hanldeLanguageChange} >
                     <option value="cpp"> C++ </option>
@@ -103,12 +103,12 @@ const SubmitCode = () => {
                 </select>
             </div>
             <Editor
-                height="100vh"
-                width="100vw"
-                language={languageName}
-                onChange={(e) => setCode(e)}
-                className="editor"
-            />
+                    height="50vh"
+                    width="50vw"
+                    language={languageName}
+                    onChange={(e) => setCode(e)}
+                    className="editor"
+                />
             <div>
                 <button onClick={handleSubmit}> Submit </button>
             </div>
@@ -124,7 +124,7 @@ const SubmitCode = () => {
                     />
                 </div>
             }
-        </>} </>
+        </div>} </>
     );
 }
 

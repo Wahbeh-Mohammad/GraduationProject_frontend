@@ -32,8 +32,8 @@ const AllProblems = (props) => {
         <Box className="all-problems-wrapper">
             <Box className="all-problems">
                 <Box component={Paper} className="flex-row-gap pagination-controls">
-                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page-1);} }> Previous </Button>
-                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page+1);} }> Next </Button>
+                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page-1);} } disabled = {page === 1}> Previous </Button>
+                    <Button variant="contained" color="secondary" onClick={ ()=>{setPage(page+1);} } disabled = {more === false}> Next </Button>
                 </Box>
                 <TableContainer component={Paper}>
                     <TableHead>

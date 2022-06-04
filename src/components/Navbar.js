@@ -59,7 +59,6 @@ const Navbar = () => {
                         <div className='links'>
                             <a href="/problems">Problems</a>
                             <a href="/contests">Contests</a>
-                            <a href="/blogs">Blogs</a>
                             <a href="/allsubmision">Submissions</a>
                             <a href="/users">Users</a>
 
@@ -86,7 +85,6 @@ const Navbar = () => {
                         <div className='links'>
                             <a href="/problems">Problems</a>
                             <a href="/contests">Contests</a>
-                            <a href="/blogs">Blogs</a>
                             <a href="/allsubmision">Submissions</a>
                             <a href="/users">Users</a>
 

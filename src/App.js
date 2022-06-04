@@ -27,7 +27,7 @@ const App = () => {
   });
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ display: "flex", flexDirection: 'column', }}>
+      <div style={{ display: "flex", flexDirection: 'column',height:'100%' }}>
         <Navbar />
         <Router>
           <Routes>

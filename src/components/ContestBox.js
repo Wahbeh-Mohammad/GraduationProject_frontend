@@ -12,7 +12,7 @@ const ContestBox = () => {
     const [contestData, setContestData] = useState({})
     const [error, setError] = useState("")
     useEffect(() => {
-        fetch("http://localhost:3000/api/v1/problem")
+        fetch("http://localhost:3000/api/v1/problem/all")
             .then(async (response) => {
                 const parsedResponse = await response.json();
                 if (response.status === 200) {
