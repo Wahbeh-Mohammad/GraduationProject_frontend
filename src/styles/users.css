@@ -1,13 +1,14 @@
 
 
-.table{
+.table {
     background-color: rgb(250, 250, 250);
     width: auto;
     height: auto;
-    padding:1em;
-    border-radius:8px;
+    padding:01em;
 }
-
+td{
+    font-size: 14px;
+}
 .filter{
     background-color: rgb(250, 250, 250);
     height: fit-content;  
@@ -18,6 +19,6 @@
 }
 
 .header{
-    padding: 3rem;
+    padding: 0rem;
     margin: 30px;
 }

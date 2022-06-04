@@ -76,7 +76,7 @@ const AllSubmision = () => {
     }
 
     return (
-        <center style={{ padding: '2em' }}>
+        <center style={{ padding: '2em',display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center' }}>
             {submisions && <table className='table' style={{ width: "90%", boxShadow: "0px 1px 12px #888888" }}>
                 <tr className='header' style={{ margin: '1em' }}>
                     <th style={{ fontWeight: "bolder", fontSize: '1.2rem' }}>Code</th>
@@ -100,7 +100,7 @@ const AllSubmision = () => {
                     }
                 >
 
-                    <DialogContent style={{ width: "300px", height: "300px" }}>
+                    <DialogContent style={{ width: "1300px", height: "700px" }}>
                         <SyntaxHighlighter language="cpp" style={atomOneLight}>
                             {code}
                         </SyntaxHighlighter>
@@ -145,9 +145,9 @@ const AllSubmision = () => {
                     )
                 })}
             </table>}
-            <div style={{display:'flex', justifyContent:'flex-end', gap:'20px',  width:'90%'}}>
+            <div style={{display:'flex', justifyContent:'space-around',  width:'90%' , marginTop:'2em'}}>
                 <Button color="secondary" onClick={handleBackPage} variant="contained" disabled={pageNumber === 1}> Previous </Button>
-                <Button color="secondary" onClick={handleNextPage} variant="contained" disabled={message === "false"}> Next </Button>
+                <Button color="secondary" style={{width:'90px'}}onClick={handleNextPage} variant="contained" disabled={message === "false"}> Next </Button>
             </div>
         </center>
 

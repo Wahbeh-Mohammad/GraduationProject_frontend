@@ -1,0 +1,39 @@
+
+
+.home-wrapper{
+    display: flex;
+    justify-content: space-around;
+    gap: 00%;
+    padding: 2em;
+}
+
+.column-one{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.problemset-wrapper{
+    text-align: left;
+}
+
+.column-two{
+    background-color: rgb(250, 250, 250);
+    border-radius: 8px;
+    box-shadow: rgb(136 136 136) 0px 1px 12px;
+    width: 20%;
+    margin-top: 80px;
+    margin-right: 100px;
+}
+
+.links-home{
+    color: #007bff
+}
+
+.links-home:hover{
+    text-decoration: underline;
+    color:#0056b3;
+}
+

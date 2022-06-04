@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   Home, Login, Submit, Register, Problem, SubmitCode,
   CreateProblem, AllSubmision, RecentUserSubmission,
-  CreateContest, Contests, AllProblems,
+  CreateContest, Contests, AllProblems,Blog,
   CreateBlog, Users, AllContests, Profile
 } from './views/index';
 import Navbar from './components/Navbar'
@@ -47,6 +47,7 @@ const App = () => {
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/contests" element={<AllContests />} />
             <Route exact path="/user/:userId" element={<Profile />} />
+            <Route exact path="/blog/:blogId" element={<Blog />} />
 
           </Routes>
         </Router>
