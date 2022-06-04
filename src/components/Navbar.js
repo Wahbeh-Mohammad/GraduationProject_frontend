@@ -14,7 +14,7 @@ const Navbar = () => {
     const handleLogout = () => {
         cookie.set("jwt", "", { maxAge: 1, path: "/" });
 
-        window.location.assign("/");
+        window.location.assign("/home");
     }
 
     useEffect(() => {
