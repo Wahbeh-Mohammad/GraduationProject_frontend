@@ -14,3 +14,4 @@ export { default as AllProblems } from "./AllProblems";
 export { default as CreateBlog } from "./CreateBlog";
 export { default as Users } from "./Users"
 export { default as AllContests } from "./AllContests"
+export { default as AdminPanel } from "./AdminPanel";
