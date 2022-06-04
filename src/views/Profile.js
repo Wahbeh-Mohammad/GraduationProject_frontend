@@ -71,7 +71,7 @@ const Profile = () => {
         
         <>
         <Avatar src="/logo.png" style={{marginRight:"0.7em", width:'42px', height:'42px'}}/>
-            {profile && userSubmissions &&
+            {profile && userSubmissions.length &&
                 <>
 
                     <h3>name : {profile.name}</h3>
