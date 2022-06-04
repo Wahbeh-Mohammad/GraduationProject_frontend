@@ -3,9 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {
   Home, Login, Submit, Register, Problem, SubmitCode,
   CreateProblem, AllSubmision, RecentUserSubmission,
-  CreateContest, Contests, AllProblems,
-  CreateBlog, Users, AllContests, Profile,
-  AdminPanel
+  CreateContest, Contests, AllProblems,Blog,
+  CreateBlog, Users, AllContests, Profile, AdminPanel
 } from './views/index';
 import Navbar from './components/Navbar'
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
@@ -44,11 +43,13 @@ const App = () => {
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/contests" element={<AllContests />} />
             <Route exact path="/user/:userId" element={<Profile />} />
+            <Route exact path="/blog/:blogId" element={<Blog />} />
             {/* admin stuff */}
             <Route exact path="/admin" element={ <AdminPanel /> } />
             <Route exact path="/admin/problem/create" element={<CreateProblem />} />
             <Route exact path="/admin/contest/create" element={<CreateContest />} />
             <Route exact path="/admin/blog/create" element={<CreateBlog />} />
+
           </Routes>
         </Router>
       </div>
