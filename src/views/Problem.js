@@ -2,13 +2,30 @@ import { Button, TableCell, TableContainer, TableHead, TextField, Typography } f
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Markdown from "../components/Markdown";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import '../styles/problem.css'
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const Problem = () => {
     const [problem, setProblem] = useState(null);
     const [samples, setSamples] = useState([]);
     const { problemId } = useParams();
 
+    const [open, setOpen] = React.useState(false);
 
+    const handleClick = () => {
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     useEffect(() => {
         try {
             fetch(`http://localhost:3000/api/v1/problem/${problemId}`, {
@@ -35,6 +52,11 @@ const Problem = () => {
         }
     }, []);
 
+    const copyToClipboard = (content) => {
+        navigator.clipboard.writeText(content);
+        setOpen(true);
+
+    }
 
     return (
         <>
@@ -68,12 +90,24 @@ const Problem = () => {
                                         return (
                                             <>
                                                 <tr key={index} style={{ padding: '2em', borderBottom: '1px solid black' }}>
-                                                    <td style={{ padding: '1.3em', fontSize: '18px' }}>
-                                                        <TextField value={sample.input} disabled={true} multiline />
-                                                    </td>
-                                                    <td style={{ padding: '1.3em', fontSize: '18px' }}>
-                                                        <TextField value={sample.output} disabled={true} multiline />
+                                                    <td>
+                                                        <div style={{ padding: '1.3em', fontSize: '18px', display: 'flex', gap: '60%' }}>
+                                                            <TextField variant="standard" InputProps={{
+                                                                disableUnderline: true, // <== added this
+                                                            }} value={sample.input} disabled={true} multiline style={{ border: 'none' }} />
 
+                                                            <Button key={index + 1} style={{height:'fit-content'}} color='secondary' variant='outlined' onClick={() => { copyToClipboard(sample.input) }}>Copy</Button>
+                                                        </div>
+                                                    </td>
+
+
+                                                    <td >
+                                                        <div style={{ padding: '1.3em', fontSize: '18px', display: 'flex', gap: '60%' }}>
+                                                            <TextField variant="standard" InputProps={{
+                                                                disableUnderline: true, // <== added this
+                                                            }} value={sample.output} disabled={true} multiline />
+                                                            <Button key={index + 2} style={{height:'fit-content'}} color='secondary' variant='outlined' onClick={() => { copyToClipboard(sample.output) }}>Copy</Button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 <tr key={index} >
@@ -86,7 +120,11 @@ const Problem = () => {
                                 </table>
                             </div>
                         </div>
-
+                        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                This is a success message!
+                            </Alert>
+                        </Snackbar>
                     </div>
                 </>
 

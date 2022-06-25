@@ -6,6 +6,7 @@
     height:100%;
     width:100%;
     margin-top: 300px;
+    border-radius: 50%;
 }
 
 .login {
@@ -13,6 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:1rem;
-    padding:2rem;
+    gap:2rem;
+    padding: 5rem;
+    padding-bottom: 2rem;
 }

@@ -70,7 +70,7 @@ const Navbar = () => {
                 <>
                     <div className="nav" >
                         <div className='brand'>
-                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
+                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">YU-CMS</a>
                             <GoCode size='1.2em' color='orange' />
                         </div>
                         <div className='links'>
@@ -86,7 +86,7 @@ const Navbar = () => {
                                     aria-controls={open ? 'basic-menu' : undefined}
                                     aria-haspopup="true"
                                     aria-expanded={open ? 'true' : undefined}
-                                    src="/mock.png" style={{marginRight:"0.7em", width:'42px', height:'42px'}}/>
+                                    src="/mock.png" style={{cursor:'pointer', marginRight:"0.7em", width:'42px', height:'42px'}} />
                                 <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
                                     <MenuItem onClick={ (e) => handleClose("profile") }> Profile </MenuItem>
                                     { user.type === "Admin" &&
@@ -104,7 +104,7 @@ const Navbar = () => {
                 <>
                     <div className="nav" >
                         <div className='brand'>
-                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">NAME HERE</a>
+                            <a style={{ marginRight: "5px", fontSize: "26px" }} href="/home">YU-CMS</a>
                             <GoCode size='1.2em' color='orange' />
                         </div>
                         <div className='links'>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { prepareCode } from "../utils/encodingUtils";
 import Editor from "@monaco-editor/react"
+import { TextField, FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const SAMPLE_CPP = `
 #include <bits/stdc++.h>
@@ -30,6 +32,7 @@ const Submit = (props) => {
     const [time, setTime] = useState(null);
     const [memory, setMemory] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
+    const [isPending, setIsPending] = useState(false);
 
     const hanldeLanguageChange = (e) => {
         const name = e.target.value;
@@ -42,7 +45,8 @@ const Submit = (props) => {
         setStdin(e.target.value)
     }
     const handleSubmit = async () => {
-        const body = { stdin, source_code: prepareCode(code), language_id: languageID};
+        setIsPending(true)
+        const body = { stdin, source_code: prepareCode(code), language_id: languageID };
         try {
             console.log(body);
             const response = await fetch("http://localhost:3000/api/v1/submission/", {
@@ -55,33 +59,44 @@ const Submit = (props) => {
             });
             const parsedResponse = await response.json();
             console.log(parsedResponse);
-            setStdout(parsedResponse.data.stdout)
+            if (parsedResponse.data === 'Compilation Error') {
+                setStdout(parsedResponse.data)
+                setIsPending(false)
+                return
+            }
+            if (parsedResponse.data.stderr) {
+                setStdout(parsedResponse.data.stderr)
+            }
+            else setStdout(parsedResponse.data.stdout)
+            setIsPending(false)
             setTime(parsedResponse.data.time)
             setMemory(parsedResponse.data.memory)
         } catch (err) {
+            setIsPending(false)
+            setStdout("ERROR")
             console.log(err);
         }
     }
 
     useEffect(() => {
         const token = cookie.get("jwt");
-        if(!token) {
+        if (!token) {
             window.location.assign("/login");
         }
         try {
             fetch("http://localhost:3000/api/v1/user/jwt", {
-                method:"POST",
+                method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ token })
-            }).then((response)=>{
+            }).then((response) => {
                 const parsedResponse = response.json();
                 console.log(parsedResponse);
-                if(response.status === 200) {
+                if (response.status === 200) {
                     setLoggedIn(true);
                 } else {
-                    cookie.set("jwt", "", { maxAge: 1, path:"/" });
+                    cookie.set("jwt", "", { maxAge: 1, path: "/" });
                     window.location.assign("/login");
                 }
             })
@@ -89,41 +104,74 @@ const Submit = (props) => {
             console.log(err);
         }
     }, []);
-    
+
     return (
-        <center style ={{marginTop:"50px"}}> { loggedIn && <>
-                <div>
+        <div style={{ marginTop: "50px", display: 'flex' }}> {loggedIn && <>
+
+            <Editor
+                height="70vh"
+                width="70vw"
+                language={languageName}
+                onChange={(e) => setCode(e)}
+                className="editor"
+            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label" style={{ marginLeft: '2em' }}>Language</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label = ""
+                        style={{ width: '75%', marginLeft: '2em', backgroundColor: 'white' }}
+                        color='secondary'
+                        value={languageName}
+                        onChange={hanldeLanguageChange}
+                    >
+                        <MenuItem value="cpp"> C++ </MenuItem>
+                        <MenuItem value="java"> Java</MenuItem>
+                        <MenuItem value="python"> Python</MenuItem>
+                    </Select>
+                </FormControl>
+                <TextField
+                    id="filled-multiline-flexible"
+                    label="Input"
+                    rows={10}
+                    style={{ backgroundColor: 'white', marginLeft: '2em', marginBlock: '2em' }}
+                    multiline
+                    maxRows={4}
+                    value={stdin}
+                    onChange={handleStdin}
+                    variant="outlined"
+                />
+                <TextField
+                    id="filled-multiline-flexible"
+                    label="Output"
+                    rows={10}
+                    style={{ backgroundColor: 'white', marginLeft: '2em' }}
+                    multiline
+                    maxRows={4}
+                    value={stdout}
+                    variant="outlined"
+                />
+                <br />
+
+                <div style={{marginLeft:'2em'}}>
+                    {!isPending && <Button variant = "contained" color = "secondary" fullWidth onClick={handleSubmit}> Run </Button>}               
+                    {isPending &&  <LoadingButton variant = "contained" color = "secondary" fullWidth loading > Submit </LoadingButton>}               
+                </div>
+                {memory && time && (<><span style={{marginLeft:'2em', marginTop:'1em'}}>Execution time: {time} s</span><br />
+                    <span style={{marginLeft:'2em'}}>Memory Usage: {memory} KB</span><br /></>)}
+            </div>
+
+        </>} </div>
+    );
+}
+
+export default Submit;
+/*                <div>
                     <select value={languageName} onChange={hanldeLanguageChange} >
                         <option value="cpp"> C++ </option>
                         <option value="java"> Java </option>
                         <option value="python"> Python </option>
                     </select>
-                </div>
-                <Editor
-                    height="50vh"
-                    width="50vw"
-                    language={languageName}
-                    onChange={(e) => setCode(e)}
-                    className="editor"
-                />
-                <div >
-                    <label for = "input">Input:</label>
-                    <textarea name = "input" onChange={handleStdin} value={stdin} rows="10" cols="50"/>
-                    <label for = "output">Output:</label>
-                    <textarea name = "output" value={stdout} rows="10" cols="50">
-                        
-                        
-                    </textarea>
-                    <br />
-
-                    {memory && time && (<><span>Execution time: {time} s</span><br/>
-                    <span>Memory Usage: {memory} KB</span><br/></>)}
-                </div>
-                <div>
-                    <button onClick={handleSubmit}> Submit </button>
-                </div>
-        </> } </center>
-    );
-}
-
-export default Submit;
+                </div> */

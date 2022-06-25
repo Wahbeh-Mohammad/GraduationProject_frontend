@@ -5,7 +5,8 @@ import Editor from "@monaco-editor/react"
 import { useParams } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import Snackbar from '@mui/material/Snackbar';
-
+import { TextField, FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 const SAMPLE_CPP = `
 #include <bits/stdc++.h>
 using namespace std;
@@ -30,7 +31,7 @@ const SubmitCode = () => {
     const [languageName, setLanguageName] = useState("cpp");
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
-    const [submitted, setSubmitted] = useState(false);
+    const [isPending, setIsPending] = useState(false);
     const { problemId } = useParams();
 
     const hanldeLanguageChange = (e) => {
@@ -42,7 +43,7 @@ const SubmitCode = () => {
     }
 
     const handleSubmit = async () => {
-        setSubmitted(true)
+        setIsPending(true)
         const body = { source_code: prepareCode(code), language_id: languageID, problemId };
         try {
             console.log(body);
@@ -59,7 +60,7 @@ const SubmitCode = () => {
             console.log(parsedResponse);
         } catch (err) {
             console.log(err);
-            setSubmitted(false)
+            setIsPending(false)
 
         }
     }
@@ -94,36 +95,37 @@ const SubmitCode = () => {
     }, []);
 
     return (
-        <> {loggedIn === true && <div>
-            <div>
-                <select value={languageName} onChange={hanldeLanguageChange} >
-                    <option value="cpp"> C++ </option>
-                    <option value="java"> Java </option>
-                    <option value="python"> Python </option>
-                </select>
-            </div>
+        <> {loggedIn === true && <div style={{ display: 'flex', marginTop: '70px' }}>
             <Editor
-                    height="50vh"
-                    width="50vw"
-                    language={languageName}
-                    onChange={(e) => setCode(e)}
-                    className="editor"
-                />
-            <div>
-                <button onClick={handleSubmit}> Submit </button>
-            </div>
-            {submitted &&
-                <div style={{ "display": "flex", "position": "fixed", "bottom": "30px", "left": "245px" }}>
-                    <Snackbar
-                        style={{ "zIndex": "-1" }}
-                        open={submitted}
-                        autoHideDuration={6000000}
-                        message="Code Submitted Succesfully"
-                    />
-                    <CircularProgress style={{ "zIndex": "1" }}
-                    />
+                height="70vh"
+                width="70vw"
+                language={languageName}
+                onChange={(e) => setCode(e)}
+                className="editor"
+            />
+            <div style={{ display: 'flex', flexDirection: 'column', width:'250px', gap:'2rem'}}>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label" style={{ marginLeft: '2em' }}>Language</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label=""
+                        style={{ width: '87%', marginLeft: '2em',marginTop:'1em', backgroundColor: 'white' }}
+                        color='secondary'
+                        value={languageName}
+                        onChange={hanldeLanguageChange}
+                    >
+                        <MenuItem value="cpp"> C++ </MenuItem>
+                        <MenuItem value="java"> Java</MenuItem>
+                        <MenuItem value="python"> Python</MenuItem>
+                    </Select>
+                </FormControl>
+                <div style={{ marginLeft: '2em' }}>
+                    {!isPending && <Button variant="contained" color="secondary" fullWidth onClick={handleSubmit}> Submit </Button>}
+                    {isPending && <LoadingButton variant="contained" color="secondary" fullWidth loading > Submit </LoadingButton>}
                 </div>
-            }
+            </div>
+
         </div>} </>
     );
 }

@@ -83,7 +83,7 @@ const Users = () => {
             <div className='filter'>
                 <div style={{ textAlign: 'center', padding: '.5em', fontSize: '2rem' }}>Filter</div>
                 <hr />
-                <InputLabel id="demo-simple-select-label" style={{ marginLeft: '1em' }}>Username</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{ marginLeft: '1em',marginTop:'1em' }}>User</InputLabel>
                 <TextField Label="Username" color="secondary" value={username} type="text" id="fname" name="fname" style={{ marginBottom:'1em',marginLeft: '1em', width: '75%' }} onChange={(e) => setUsername(e.target.value)} />
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label" style={{ marginLeft: '1em' }}>Country</InputLabel>
